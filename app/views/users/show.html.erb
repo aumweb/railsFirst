@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  
+  <h1><%= @user.username %>'s profile</h1>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<%= gravatar_for @user, size:200 %> 
+
+<div class="apple_pagination mt-4">
+    <div class="page_info">
+      <%= page_entries_info @articles %>
+    </div>
+    <%= will_paginate @articles, :container => false %>
+</div>
+ <%= render 'articles/articles' %>
+<% if logged_in? && @user == current_user %>
+<%= link_to 'Edit', edit_user_path(@user) %> 
+<% end %>
+<%= link_to 'Back', users_path %>

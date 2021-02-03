@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Blogs</h1>
-
+<div class="flicker_pagination">
+    <div class="page_info">
+      <%= page_entries_info @blogs %>
+    </div>
+    <%= will_paginate @blogs, :container => false %>
+</div>
 <table>
   <thead>
     <tr>

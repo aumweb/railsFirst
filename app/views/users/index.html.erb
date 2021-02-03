@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+<div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @users %>
+    </div>
+    <%= will_paginate @users, :container => false %>
+</div>
+  <div class="row justify-content-md-center">
+    <% @users.each do |user| %>
+      <div class="col-8 mt-4 shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="card text-center">
+        <div class="card-header">
+          <p class="font-italic"> <%= link_to user.username,user_path(user)  %></p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to gravatar_for(user,size:200), user %>
+          </h5>
+          <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
+          <%= link_to 'Profile', user,class: "btn btn-outline-primary" %>
+          <% if logged_in? && user == current_user %>
+          <%= link_to 'Edit Profile', edit_user_path(user),class: "btn btn-outline-info" %>
+          <% end %>
+          
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+
+    
+  </div>
+<br>
+
+<%= link_to 'New User', 'signup' %>

@@ -1,10 +1,11 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_user, except: [:show, :index]
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    #@blogs = Blog.all
+    @blogs = Blog.paginate :page => params[:page], :per_page => 3
   end
 
   # GET /blogs/1

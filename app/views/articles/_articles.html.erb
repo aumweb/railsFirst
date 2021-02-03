@@ -1,0 +1,26 @@
+  <div class="row justify-content-md-center">
+    <% @articles.each do |article| %>
+      <div class="col-8 mt-4 shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="card text-center">
+        <div class="card-header">
+          <p class="font-italic">By <%= article.user.username if article.user  %></p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><td><%= link_to article.title, article_path(article),class:"text-success" %></td></h5>
+          <p class="card-text"><%= truncate(article.description, length:150) %></p>
+          <%= link_to 'Show article', article,class: "btn btn-outline-primary" %>
+          <% if logged_in? && (article.user == current_user || current_user.is_admin?) %>  
+          <%= link_to 'Edit article', edit_article_path(article),class: "btn btn-outline-info" %>
+          <%= link_to 'Delete article', article,method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %>
+          <% end %>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+
+    
+  </div>

@@ -1,14 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	
+  <div class="row justify-content-md-center">
+    
+      <div class="col-8 mt-4 shadow-sm p-3 mb-5 bg-white rounded">
+      <div class="card text-center">
+        <div class="card-header">
+          <p class="font-italic">By <%= @article.user.username %></p>
+        </div>
+        <div class="card-body">
+          <h2><%= @article.title %></h2>
+          <p class="card-text"><%= simple_format(@article.description) %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+          <% if logged_in? && (@article.user == current_user || current_user.is_admin?) %>          
+            <%= link_to 'Edit article', edit_article_path(@article),class: "btn btn-outline-info" %>
+            <%= link_to 'Delete article', @article,method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %>
+          <% end %>
+        </div>
+        <div class="card-footer text-muted">
+          Created <%= time_ago_in_words(@article.created_at) %>
+          Updated <%= time_ago_in_words(@article.updated_at) %>
+        </div>
+      </div>
+    </div>
+    
 
-<p>
-  <strong>Description:</strong>
-  <%= @article.description %>
-</p>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+    
+  </div>
+    
+
+<br>
+
+<%= link_to 'New Article', new_article_path %>
+</div>
