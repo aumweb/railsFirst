@@ -1,0 +1,27 @@
+<div class="container">
+<div class="apple_pagination">
+    <div class="page_info">
+      <%= page_entries_info @category %>
+    </div>
+    <%= will_paginate @category, :container => false %>
+</div>
+    <table border="1">
+    	<tr>
+    	<th>Title</th>
+    	<th>Description</th>
+    	<th colspan="2">Action</th>
+    	</tr>
+    <% @category.each do |cat| %>
+    	<tr>
+    	<td><%= cat.title %></td>
+    	<td><%= cat.description %></td>
+    	<td><%= link_to 'Edit', "/category/#{cat.id}/edit" %></td>
+    	<td><%= link_to 'Delete', "/category/#{cat.id}", method: :delete, data:{confirm:"Are you sure you wants to delete?"} %></td>
+    	<%#= link_to 'Delete article', article,method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-outline-danger" %>
+    	</tr>
+    <% end %>
+	</table>
+
+<br>
+
+<%= link_to 'New Category', category_new_path %>
